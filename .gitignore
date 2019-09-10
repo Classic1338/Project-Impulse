@@ -2,3 +2,14 @@
 *.db
 *.ipch
 .vs/csgo-cheat/v15/.suo
+*.pdb
+*.obj
+*.dll
+*.idb
+*.tlog
+*.ilk
+*.lib
+*.exp
+*.log
+*.hpp
+*.opendb
