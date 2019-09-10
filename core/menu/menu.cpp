@@ -7,7 +7,8 @@
 void Menu::Render()
 {
 
-	if (menuOpened) {
+	if (!menuOpened)
+		return;
 
 		zgui::poll_input("Counter-Strike: Global Offensive");
 
@@ -52,5 +53,4 @@ void Menu::Render()
 			}
 			zgui::end_window();
 		}
-	}
 }

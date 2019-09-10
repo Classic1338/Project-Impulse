@@ -9,7 +9,7 @@ public:
 	bool DroppedGuns = false;
 	bool Desync = false;
 	bool Bhop = false;
-	bool Watermark = false;
+	bool Watermark = true;
 	bool Legitbot = false;
 	bool ClanTag = false;
 	bool Ragebot = false;

@@ -17,6 +17,7 @@ uint8_t* present_address;
 hooks::present_fn original_present;
 uint8_t* reset_address;
 hooks::reset_fn original_reset;
+HWND hooks::window;
 
 Esp esp;
 Menu menu;
@@ -57,7 +58,8 @@ void hooks::initialize( ) {
 //	**reinterpret_cast<void***>(present_address) = reinterpret_cast<void*>(&present);
 //	**reinterpret_cast<void***>(reset_address) = reinterpret_cast<void*>(&reset);
 
-	wndproc_original = ( WNDPROC ) SetWindowLongPtrA( FindWindow( "Valve001", NULL ), GWL_WNDPROC, ( LONG ) wndproc );
+	window = FindWindowW(L"Valve001", NULL);
+	wndproc_original = reinterpret_cast<WNDPROC>(SetWindowLongW(window, GWL_WNDPROC, reinterpret_cast<LONG>(wndproc)));
 
 	interfaces::console->get_convar( "mat_queue_mode" )->set_value( 0 );
 	interfaces::console->get_convar( "viewmodel_fov" )->callbacks.SetSize( 0 );
@@ -81,7 +83,7 @@ void hooks::shutdown( ) {
 	renderview_hook->release( );
 	surface_hook->release();
 
-	SetWindowLongPtrA( FindWindow( "Valve001", NULL ), GWL_WNDPROC, ( LONG ) wndproc_original );
+	SetWindowLongW(FindWindowW(L"Valve001", NULL), GWL_WNDPROC, reinterpret_cast<LONG>(wndproc_original));
 }
 
 void __stdcall hooks::draw_model_execute(IMatRenderContext * ctx, const draw_model_state_t & state, const model_render_info_t & info, matrix_t * bone_to_world) noexcept {
@@ -163,13 +165,14 @@ void __stdcall hooks::scene_end( ) {
 
 LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam ) noexcept {
 
-	//static bool pressed = false;
+	static bool pressed = false;
 
 	//if (!pressed && GetAsyncKeyState(VK_INSERT)) {
 	//	pressed = true;
 	//}
 	//else if (pressed && !GetAsyncKeyState(VK_INSERT)) {
 	//	pressed = false;
+	//	
 
 	//	menu.menuOpened = !menu.menuOpened;
 	//}
@@ -182,7 +185,7 @@ LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM
 	//	interfaces::inputsystem->enable_input(true);
 	//}
 
-	//if (menu.menuOpened && VK_INSERT)
+	//if (menu.menuOpened)
 	//	return true;
 
 	return CallWindowProcW(wndproc_original, hwnd, message, wparam, lparam);
@@ -191,7 +194,8 @@ LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM
 void __stdcall hooks::lock_cursor() noexcept {
 	static auto original_fn = reinterpret_cast<lock_cursor_fn>(surface_hook->get_original(67));
 
-	if (VK_INSERT) { menu.menuOpened = true; }
+	if (GetAsyncKeyState(VK_INSERT))
+		menu.menuOpened = true;
 
 	if (menu.menuOpened)
 		interfaces::surface->unlock_cursor();
