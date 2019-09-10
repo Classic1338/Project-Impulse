@@ -53,19 +53,19 @@ void Esp::draw(player_t * entity)
 	color rainbow;
 	rainbow.FromHSV(fmod(last_time * 0.0002f, 1.f), 1.f, 0.5f);
 
-	if (Features.Box)
-	{
-		auto red = 0 * 255;
-		auto green = 0 * 255;
-		auto blue = 0 * 255;
-		auto weapon = entity->active_weapon();
+	//if (Features.Box)
+	//{
+	//	auto red = 0 * 255;
+	//	auto green = 0 * 255;
+	//	auto blue = 0 * 255;
+	//	auto weapon = entity->active_weapon();
 
-		
-		render::draw_outline(bbox.x - 1, bbox.y - 1, bbox.w + 2, bbox.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
-		render::rect(bbox.x, bbox.y, bbox.w, bbox.h, color(90, 31, 166, 255 + alpha[entity->index()]));
-		render::draw_outline(bbox.x + 1, bbox.y + 1, bbox.w - 2, bbox.h - 2, color(0, 0, 0, 255 + alpha[entity->index()]));
-		
-	}
+	//	
+	//	render::draw_outline(bbox.x - 1, bbox.y - 1, bbox.w + 2, bbox.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
+	//	render::rect(bbox.x, bbox.y, bbox.w, bbox.h, color(90, 31, 166, 255 + alpha[entity->index()]));
+	//	render::draw_outline(bbox.x + 1, bbox.y + 1, bbox.w - 2, bbox.h - 2, color(0, 0, 0, 255 + alpha[entity->index()]));
+	//	
+	//}
 
 	if (Features.Weapon) {
 		auto red = 0 * 255;
@@ -110,28 +110,28 @@ void Esp::draw(player_t * entity)
 	}
 
 	if (Features.Health) {
-		box temp(bbox.x - 5, bbox.y + (bbox.h - bbox.h * (utilities::math::clamp_value<int>(entity->health(), 0, 100.f) / 100.f)), 1, bbox.h * (utilities::math::clamp_value<int>(entity->health(), 0, 100) / 100.f) - (entity->health() >= 100 ? 0 : -1));
+		box temp(bbox.x - 5, bbox.y - 5 + (bbox.h - bbox.h * (utilities::math::clamp_value<int>(entity->health(), 0, 100.f) / 100.f)), 1, bbox.h * (utilities::math::clamp_value<int>(entity->health(), 0, 100) / 100.f) - (entity->health() >= 100 ? 0 : -1));
 		box temp_bg(bbox.x - 5, bbox.y, 1, bbox.h);
 
 		auto health_color = color((255 - entity->health() * 2.55), (entity->health() * 2.55), 0, alpha[entity->index()]);
 
 		if (entity->health() > 99)
-			health_color = color(0, 255, 0);
+			health_color = color(0, 255, 0, 200);
 
 		else if (entity->health() > 65)
-			health_color = color(232, 145, 23);
+			health_color = color(232, 145, 23, 200);
 
 		else if (entity->health() > 35)
-			health_color = color(232, 63, 16);
+			health_color = color(232, 63, 16, 200);
 
 		else if (entity->health() > 5)
-			health_color = color(255, 0, 0);
+			health_color = color(255, 0, 0, 200);
 
 		//render::draw_filled_rect(temp_bg.x - 1, temp_bg.y - 1, temp_bg.w + 2, temp_bg.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
 		//render::draw_filled_rect(temp.x, temp.y, temp.w, temp.h, color(health_color));
 
-		render::draw_filled_rect(bbox.x - 40 + (bbox.w / 2), bbox.h + bbox.y + 2, 13, 75, color(33, 35, 47, 255));
-		render::draw_filled_rect(temp.x, temp.y, 13, temp.h, color(health_color));
+		render::draw_filled_rect(temp.x, temp.y, 13, temp.h, color(33, 35, 47, 155));
+		render::draw_filled_rect(temp.x, temp.y, 3, temp.h, color(health_color));
 	}
 }
 
