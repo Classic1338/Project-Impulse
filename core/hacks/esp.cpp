@@ -61,10 +61,10 @@ void Esp::draw(player_t * entity)
 		auto weapon = entity->active_weapon();
 
 		if (Features.Rainbow) {
-			render::draw_filled_rect(bbox.x, bbox.y, bbox.w + 13, bbox.h + 2, color(rainbow));
+			render::draw_filled_rect(bbox.x, bbox.y - 5, bbox.w + 13, bbox.h + 2, color(rainbow));
 		}
 		else {
-			render::draw_filled_rect(bbox.x, bbox.y, bbox.w + 13, bbox.h + 2, color(33, 35, 47, 155));
+			render::draw_filled_rect(bbox.x, bbox.y - 5, bbox.w + 13, bbox.h + 2, color(33, 35, 47, 155));
 		}
 
 		//render::draw_outline(bbox.x - 1, bbox.y - 1, bbox.w + 2, bbox.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
@@ -103,7 +103,7 @@ void Esp::draw(player_t * entity)
 		std::transform(print.begin(), print.end(), print.begin(), ::tolower);
 
 		if (Features.Rainbow) {
-			render::draw_filled_rect(bbox.x - 40 + (bbox.w / 2), bbox.y - 13, 75, 15, color(33, 35, 47, 155));
+			render::draw_filled_rect(bbox.x - 40 + (bbox.w / 2), bbox.y - 16, 75, 15, color(33, 35, 47, 155));
 			render::draw_filled_rect(bbox.x - 40 + (bbox.w / 2), bbox.y - 1, 75, 3, color(rainbow));
 			render::draw_text(bbox.x + (bbox.w / 2), bbox.y - 14, render::main_font, print, true, color(255, 255, 255, 155 + alpha[entity->index()]));
 		}
@@ -136,8 +136,8 @@ void Esp::draw(player_t * entity)
 		//render::draw_filled_rect(temp_bg.x - 1, temp_bg.y - 1, temp_bg.w + 2, temp_bg.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
 		//render::draw_filled_rect(temp.x, temp.y, temp.w, temp.h, color(health_color));
 
-		render::draw_filled_rect(bbox.x, bbox.y, bbox.w + 13, bbox.h + 2, color(33, 35, 47, 155));
-	//	render::draw_filled_rect(temp.x, temp.y, 3, temp.h, color(health_color));
+		render::draw_filled_rect(bbox.x - 5, bbox.y - 5, bbox.w / 100, bbox.h + 2, color(33, 35, 47, 155));
+		render::draw_filled_rect(temp.x, temp.y, 3, temp.h, color(health_color));
 	}
 }
 

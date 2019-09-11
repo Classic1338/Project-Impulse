@@ -19,6 +19,7 @@ void Menu::Render()
 		zgui::checkbox("rainbow", Features.Rainbow);
 		zgui::checkbox("name esp", Features.Name);
 		zgui::checkbox("box esp", Features.Box);
+		zgui::checkbox("health esp", Features.Health);
 	}
 	zgui::end_groupbox();
 	zgui::begin_groupbox("misc", { 100, 150 }); 
@@ -27,6 +28,7 @@ void Menu::Render()
 		zgui::checkbox("legit aa", Features.Desync);
 		zgui::checkbox("watermark", Features.Watermark);
 		zgui::checkbox("clantag", Features.ClanTag);	
+		zgui::checkbox("backtrack", Features.Backtrack);
 	}
 	zgui::end_groupbox();
 	zgui::end_window();
