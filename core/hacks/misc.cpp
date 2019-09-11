@@ -25,7 +25,7 @@ void c_misc::watermark() noexcept {
 	std::string print = "Project Impulse";
 
 	if (Features.Rainbow) {
-		render::draw_filled_rect(width - 275, 4, 260, 20, color(33, 35, 47, 155));
+		render::draw_filled_rect(width - 275, 4, 260, 20, color(33, 35, 47, 200));
 		render::draw_filled_rect(width - 275, 4, 260, 3, color(rainbow));
 		render::text(width - 270, 7, color(rainbow), render::main_font, false, print.c_str()); //90, 31, 166, 255
 	}
