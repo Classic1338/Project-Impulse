@@ -47,6 +47,18 @@ std::uint8_t* utilities::pattern_scan( void* module, const char* signature ) {
 	return nullptr;
 }
 
+bool utilities::is_behind_smoke(vec3_t start_pos, vec3_t end_pos) {
+	typedef bool(__cdecl* line_goes_through_smoke) (vec3_t, vec3_t);
+	static line_goes_through_smoke line_goes_through_smoke_fn = 0;
+
+	if (!line_goes_through_smoke_fn)
+		line_goes_through_smoke_fn = reinterpret_cast<line_goes_through_smoke>(utilities::pattern_scan(GetModuleHandleA("client_panorama.dll"), "55 8B EC 83 EC 08 8B 15 ? ? ? ? 0F 57 C0"));
+
+	if (line_goes_through_smoke_fn)
+		return line_goes_through_smoke_fn(start_pos, end_pos);
+	return false;
+}
+
 void utilities::apply_clan_tag(const char * name) {
 	using Fn = int(__fastcall *)(const char *, const char *);
 	static auto apply_clan_tag_fn = reinterpret_cast<Fn>(utilities::pattern_scan(GetModuleHandleA("engine.dll"), "53 56 57 8B DA 8B F9 FF 15"));

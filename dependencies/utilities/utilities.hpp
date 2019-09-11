@@ -26,5 +26,6 @@ namespace utilities {
 		void* capture_interface( const char* mod, const char* iface );
 	}
 	std::uint8_t* pattern_scan( void* module, const char* signature );
+	bool is_behind_smoke(vec3_t start_pos, vec3_t end_pos);
 	void apply_clan_tag(const char * name);
 }

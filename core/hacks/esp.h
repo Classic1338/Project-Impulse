@@ -4,6 +4,7 @@ class Esp
 {
 public:
 	void loop();
+	void chams() noexcept;
 	void draw(player_t * Entity);
 
 	void dropped_weapons(player_t * entity) noexcept;

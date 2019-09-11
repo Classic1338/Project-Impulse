@@ -177,6 +177,7 @@
     <ClInclude Include="dependencies\interfaces\ivengineclient.hpp" />
     <ClInclude Include="dependencies\interfaces\ivmodelinfo.hpp" />
     <ClInclude Include="dependencies\interfaces\ivmodelrender.hpp" />
+    <ClInclude Include="dependencies\interfaces\i_render_view.hpp" />
     <ClInclude Include="dependencies\interfaces\i_trace.hpp" />
     <ClInclude Include="dependencies\utilities\fnv.hpp" />
     <ClInclude Include="dependencies\utilities\netvars.hpp" />

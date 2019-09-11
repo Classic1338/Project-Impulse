@@ -1,6 +1,7 @@
 #include "interfaces.hpp"
 #include "../common_includes.hpp"
 #include "glow_manager.hpp"
+#include "i_render_view.hpp"
 
 i_base_client_dll* interfaces::client = nullptr;
 i_input* interfaces::input = nullptr;
@@ -12,9 +13,9 @@ i_panel* interfaces::panel = nullptr;
 i_surface* interfaces::surface = nullptr;
 c_global_vars_base* interfaces::globals = nullptr;
 i_material_system* interfaces::material_system = nullptr;
+i_render_view* interfaces::render_view = nullptr;
 iv_model_info* interfaces::model_info = nullptr;
 iv_model_render* interfaces::model_render = nullptr;
-void* interfaces::render_view = nullptr;
 iv_effects* interfaces::effects = nullptr;
 i_console* interfaces::console = nullptr;
 i_inputsytem* interfaces::inputsystem = nullptr;
@@ -33,8 +34,8 @@ void interfaces::initialize( ) {
 	material_system = reinterpret_cast< i_material_system* >( utilities::game::capture_interface( "materialsystem.dll", "VMaterialSystem080" ) );
 	model_info = reinterpret_cast< iv_model_info* >( utilities::game::capture_interface( "engine.dll", "VModelInfoClient004" ) );
 	model_render = reinterpret_cast< iv_model_render* >( utilities::game::capture_interface( "engine.dll", "VEngineModel016" ) );
-	render_view = reinterpret_cast< void* >( utilities::game::capture_interface( "engine.dll", "VEngineRenderView014" ) );
 	console = reinterpret_cast< i_console* >( utilities::game::capture_interface( "vstdlib.dll", "VEngineCvar007" ) );
+	render_view = reinterpret_cast<i_render_view*>(utilities::game::capture_interface("engine.dll", "VEngineRenderView014"));
 	localize = reinterpret_cast< i_localize* >( utilities::game::capture_interface( "localize.dll", "Localize_001" ) );
 	event_manager = reinterpret_cast< i_game_event_manager* >( utilities::game::capture_interface( "engine.dll", "GAMEEVENTSMANAGER002" ) );
 	debug_overlay = reinterpret_cast< iv_debug_overlay* >( utilities::game::capture_interface( "engine.dll", "VDebugOverlay004" ) );

@@ -17,6 +17,7 @@
 #include "iinput.hpp"
 #include "iveffects.hpp"
 #include "glow_manager.hpp"
+#include "i_render_view.hpp"
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -36,7 +37,7 @@ namespace interfaces {
 	extern i_material_system* material_system;
 	extern iv_model_info* model_info;
 	extern iv_model_render* model_render;
-	extern void* render_view;
+	extern i_render_view* render_view;
 	extern iv_effects* effects;
 	extern iv_debug_overlay* debug_overlay;
 	extern i_console* console;
