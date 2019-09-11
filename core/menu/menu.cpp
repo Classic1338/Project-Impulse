@@ -18,7 +18,7 @@ void Menu::Render()
 		zgui::begin_groupbox("esp", { 100, 150 }); 
 		zgui::checkbox("rainbow", Features.Rainbow);
 		zgui::checkbox("name esp", Features.Name);
-		zgui::checkbox("health esp", Features.Health);
+		zgui::checkbox("box esp", Features.Box);
 	}
 	zgui::end_groupbox();
 	zgui::begin_groupbox("misc", { 100, 150 }); 

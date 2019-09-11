@@ -53,19 +53,25 @@ void Esp::draw(player_t * entity)
 	color rainbow;
 	rainbow.FromHSV(fmod(last_time * 0.0002f, 1.f), 1.f, 0.5f);
 
-	//if (Features.Box)
-	//{
-	//	auto red = 0 * 255;
-	//	auto green = 0 * 255;
-	//	auto blue = 0 * 255;
-	//	auto weapon = entity->active_weapon();
+	if (Features.Box)
+	{
+		auto red = 0 * 255;
+		auto green = 0 * 255;
+		auto blue = 0 * 255;
+		auto weapon = entity->active_weapon();
 
-	//	
-	//	render::draw_outline(bbox.x - 1, bbox.y - 1, bbox.w + 2, bbox.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
-	//	render::rect(bbox.x, bbox.y, bbox.w, bbox.h, color(90, 31, 166, 255 + alpha[entity->index()]));
-	//	render::draw_outline(bbox.x + 1, bbox.y + 1, bbox.w - 2, bbox.h - 2, color(0, 0, 0, 255 + alpha[entity->index()]));
-	//	
-	//}
+		if (Features.Rainbow) {
+			render::draw_filled_rect(bbox.x, bbox.y, bbox.w + 13, bbox.h + 2, color(rainbow));
+		}
+		else {
+			render::draw_filled_rect(bbox.x, bbox.y, bbox.w + 13, bbox.h + 2, color(33, 35, 47, 155));
+		}
+
+		//render::draw_outline(bbox.x - 1, bbox.y - 1, bbox.w + 2, bbox.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
+		//render::rect(bbox.x, bbox.y, bbox.w, bbox.h, color(90, 31, 166, 255 + alpha[entity->index()]));
+		//render::draw_outline(bbox.x + 1, bbox.y + 1, bbox.w - 2, bbox.h - 2, color(0, 0, 0, 255 + alpha[entity->index()]));
+		
+	}
 
 	if (Features.Weapon) {
 		auto red = 0 * 255;
@@ -130,8 +136,8 @@ void Esp::draw(player_t * entity)
 		//render::draw_filled_rect(temp_bg.x - 1, temp_bg.y - 1, temp_bg.w + 2, temp_bg.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
 		//render::draw_filled_rect(temp.x, temp.y, temp.w, temp.h, color(health_color));
 
-		render::draw_filled_rect(temp.x, temp.y, 13, temp.h, color(33, 35, 47, 155));
-		render::draw_filled_rect(temp.x, temp.y, 3, temp.h, color(health_color));
+		render::draw_filled_rect(bbox.x, bbox.y, bbox.w + 13, bbox.h + 2, color(33, 35, 47, 155));
+	//	render::draw_filled_rect(temp.x, temp.y, 3, temp.h, color(health_color));
 	}
 }
 
