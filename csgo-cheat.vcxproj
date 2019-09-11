@@ -129,7 +129,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="core\GlobalVars.cpp" />
     <ClCompile Include="core\hacks\antiaim.cpp" />
     <ClCompile Include="core\hacks\backtrack.cpp" />
     <ClCompile Include="core\hacks\esp.cpp" />
@@ -147,7 +146,6 @@
     <ClCompile Include="source-sdk\math\vector3d.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\GlobalVars.h" />
     <ClInclude Include="core\hacks\antiaim.h" />
     <ClInclude Include="core\hacks\backtrack.h" />
     <ClInclude Include="core\hacks\esp.h" />
