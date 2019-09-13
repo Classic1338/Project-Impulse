@@ -21,7 +21,7 @@ unsigned long __stdcall initial_thread( void* reserved ) {
 	FreeConsole( );
 
 	FreeLibraryAndExitThread( reinterpret_cast< HMODULE >( reserved ), 0 );
-	return 0ul;
+	return 0ul; //changed nothing but testing github sends
 }
 
 bool __stdcall DllMain( void* instance, unsigned long reason_to_call, void* reserved ) {
