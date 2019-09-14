@@ -231,7 +231,9 @@ bool zgui::begin_window(std::string_view title, const vec2 default_size, const u
 	if (!(flags & zgui_window_flags_always_open))
 	{
 		if (key_pressed(global_config.menu_toggle_key))
+			
 			context.window.opened = !context.window.opened;
+		//	menu.menuOpened;
 	}
 	else
 		context.window.opened = true;

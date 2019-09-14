@@ -162,43 +162,47 @@ void __stdcall hooks::scene_end( ) {
 	reinterpret_cast< scene_end_fn >( renderview_hook->get_original( 9 ) )( interfaces::render_view );
 }
 
+#include "../menu/zgui/zgui.hpp"
 
 LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam ) noexcept {
 
 	static bool pressed = false;
 
-	//if (!pressed && GetAsyncKeyState(VK_INSERT)) {
-	//	pressed = true;
-	//}
-	//else if (pressed && !GetAsyncKeyState(VK_INSERT)) {
-	//	pressed = false;
-	//	
+	if (!pressed && GetAsyncKeyState(VK_INSERT)) {
+		pressed = true;
+	}
+	else if (pressed && !GetAsyncKeyState(VK_INSERT)) {
+		pressed = false;
+		
 
-	//	menu.menuOpened = !menu.menuOpened;
-	//}
+		menu.menuOpened = !menu.menuOpened;
+	}
 
-	//if (menu.menuOpened) {
-	//	interfaces::inputsystem->enable_input(false);
+	if (menu.menuOpened) {
+		interfaces::inputsystem->enable_input(false);
 
-	//}
-	//else if (!menu.menuOpened) {
-	//	interfaces::inputsystem->enable_input(true);
-	//}
+	}
+	else if (!menu.menuOpened) {
+		interfaces::inputsystem->enable_input(true);
+	}
 
-	//if (menu.menuOpened)
-	//	return true;
+	if (menu.menuOpened && GetKeyState(VK_INSERT))
+		return true;
 
 	return CallWindowProcW(wndproc_original, hwnd, message, wparam, lparam);
 }
 
 void __stdcall hooks::lock_cursor() noexcept {
-	static auto original_fn = reinterpret_cast<lock_cursor_fn>(surface_hook->get_original(67));
 
-	if (GetAsyncKeyState(VK_INSERT))
+	if (GetKeyState(VK_INSERT))
 		menu.menuOpened = true;
 
-	if (menu.menuOpened)
+	static auto original_fn = reinterpret_cast<lock_cursor_fn>(surface_hook->get_original(67));
+
+	if (menu.menuOpened) {
 		interfaces::surface->unlock_cursor();
+		return;
+	}
 
 	original_fn(interfaces::surface);
 
