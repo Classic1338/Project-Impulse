@@ -76,7 +76,8 @@ void Esp::draw(player_t * entity)
 		
 	}
 
-	if (Features.Weapon) {
+	if (Features.Weapon)
+	{
 		auto red = 0 * 255;
 		auto green = 0 * 255;
 		auto blue = 0 * 255;
