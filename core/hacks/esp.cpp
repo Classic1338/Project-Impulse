@@ -38,60 +38,7 @@ void Esp::loop()
 }
 
 void Esp::chams() noexcept {
-	if (!Features.Chams || (!Features.ChamsVis))
-		return;
-
-	for (int i = 1; i <= interfaces::globals->max_clients; i++) {
-		auto entity = reinterpret_cast<player_t*>(interfaces::entity_list->get_client_entity(i));
-		auto local_player = reinterpret_cast<player_t*>(interfaces::entity_list->get_client_entity(interfaces::engine->get_local_player()));
-
-		if (!entity || !entity->is_alive() || entity->dormant() || !local_player)
-			continue;
-
-		bool is_teammate = entity->team() == local_player->team();
-		bool is_enemy = entity->team() != local_player->team();
-
-		static i_material* mat = nullptr;
-		auto textured = interfaces::material_system->find_material("aristois_material", TEXTURE_GROUP_MODEL, true, nullptr);
-		auto metalic = interfaces::material_system->find_material("aristois_reflective", TEXTURE_GROUP_MODEL, true, nullptr);
-		auto dogtag = interfaces::material_system->find_material("models/inventory_items/dogtags/dogtags_outline", TEXTURE_GROUP_MODEL, true, nullptr);
-		auto flat = interfaces::material_system->find_material("debug/debugdrawflat", TEXTURE_GROUP_MODEL, true, nullptr);
-		textured->increment_reference_count();  //we need increment_reference_count cuz without it our materialsystem.dll will crash after  map change - designer
-		metalic->increment_reference_count();
-		flat->increment_reference_count();
-		dogtag->increment_reference_count();
-
-		switch (Features.ChamsType) {
-		case 0:
-			mat = textured;
-			break;
-		case 1:
-			mat = flat;
-			break;
-		case 2:
-			mat = metalic;
-			break;
-		case 3:
-			mat = dogtag;
-			break;
-		}
-
-		if (is_enemy) {
-			if (Features.ChamsVis) {
-			//	if (utilities::is_behind_smoke(local_player->eye_angles(), entity->get_hitbox_position(entity, hitbox_head)) && Features.ChamsVis)
-					return;
-
-				interfaces::render_view->modulate_color(Features.clr_chams_invis);
-				interfaces::render_view->set_blend(Features.clr_chams_invis[3]);
-				mat->set_material_var_flag(MATERIAL_VAR_IGNOREZ, false);
-
-				interfaces::model_render->override_material(mat);
-				entity->draw_model(1, 255);
-			}
-		}
-
-		interfaces::model_render->override_material(nullptr);
-	}
+ 
 }
 
 void Esp::draw(player_t * entity)

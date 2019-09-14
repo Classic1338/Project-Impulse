@@ -89,7 +89,7 @@ void hooks::shutdown( ) {
 void __stdcall hooks::draw_model_execute(IMatRenderContext * ctx, const draw_model_state_t & state, const model_render_info_t & info, matrix_t * bone_to_world) noexcept {
 	static auto original_fn = reinterpret_cast<draw_model_execute_fn>(modelrender_hook->get_original(21));
 
-	//g_esp.glow();
+	esp.chams();
 
 	original_fn(interfaces::model_render, ctx, state, info, bone_to_world);
 }
