@@ -73,7 +73,7 @@ void Esp::draw(player_t * entity)
 		//render::draw_outline(bbox.x - 1, bbox.y - 1, bbox.w + 2, bbox.h + 2, color(0, 0, 0, 255 + alpha[entity->index()]));
 		//render::rect(bbox.x, bbox.y, bbox.w, bbox.h, color(90, 31, 166, 255 + alpha[entity->index()]));
 		//render::draw_outline(bbox.x + 1, bbox.y + 1, bbox.w - 2, bbox.h - 2, color(0, 0, 0, 255 + alpha[entity->index()]));
-		
+
 	}
 
 	if (Features.Weapon)
@@ -99,7 +99,7 @@ void Esp::draw(player_t * entity)
 			render::draw_filled_rect(bbox.x - 40 + (bbox.w / 2), bbox.h + bbox.y + 2, 75, 3, color(90, 31, 166, 255));
 			render::draw_text(bbox.x + (bbox.w / 2), bbox.h + bbox.y + 2, render::main_font, weapons, true, color(255, 255, 255, 255 + alpha[entity->index()]));
 		}
-	}	
+	}
 
 	if (Features.Name)
 	{
