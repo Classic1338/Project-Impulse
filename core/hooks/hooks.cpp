@@ -111,10 +111,11 @@ bool __stdcall hooks::create_move(float frame_time, c_usercmd* user_cmd) {
 
 	if (Features.Desync) 
 	{
-		//if (!send_packet)
-		//{
-		//	user_cmd->view_angles.y -= 35;
-		//}
+		//send_packet = !send_packet;
+		if (send_packet)
+		{
+			user_cmd->view_angles.y -= 45.f;
+		}
 
 	}
 
@@ -127,6 +128,16 @@ bool __stdcall hooks::create_move(float frame_time, c_usercmd* user_cmd) {
 	misc.clantag_spammer();
 
 	user_cmd->buttons |= in_bullrush;
+
+	//clamping movement
+	user_cmd->forward_move = std::clamp(user_cmd->forward_move, -450.0f, 450.0f);
+	user_cmd->side_move = std::clamp(user_cmd->side_move, -450.0f, 450.0f);
+	user_cmd->up_move = std::clamp(user_cmd->up_move, -450.0f, 450.0f);
+
+	// clamping angles
+	user_cmd->view_angles.x = std::clamp(user_cmd->view_angles.x, -89.0f, 89.0f);
+	user_cmd->view_angles.y = std::clamp(user_cmd->view_angles.y, -180.0f, 180.0f);
+	user_cmd->view_angles.z = 0.0f;
 	return false;
 }
 
