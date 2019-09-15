@@ -5,6 +5,7 @@
 #include "../hacks/esp.h"
 #include "../menu/features.hpp"
 #include "../hacks/misc.h"
+#include "../hacks/rageaim.h"
 
 std::unique_ptr<vmt_hook> hooks::client_hook;
 std::unique_ptr<vmt_hook> hooks::clientmode_hook;
@@ -125,6 +126,8 @@ bool __stdcall hooks::create_move(float frame_time, c_usercmd* user_cmd) {
 			user_cmd->buttons &= ~in_jump;/*if you are in air and on buttons still are in jump, remove the jump so when you land u can jump again*/
 	}
 
+	
+	rage.run(user_cmd);
 	misc.clantag_spammer();
 
 	user_cmd->buttons |= in_bullrush;

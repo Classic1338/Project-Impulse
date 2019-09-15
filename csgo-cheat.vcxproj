@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="core\hacks\antiaim.cpp" />
     <ClCompile Include="core\hacks\backtrack.cpp" />
+    <ClCompile Include="core\hacks\enginepred.cpp" />
     <ClCompile Include="core\hacks\esp.cpp" />
     <ClCompile Include="core\hacks\legitaim.cpp" />
     <ClCompile Include="core\hacks\misc.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="core\hacks\antiaim.h" />
     <ClInclude Include="core\hacks\backtrack.h" />
+    <ClInclude Include="core\hacks\enginepred.hpp" />
     <ClInclude Include="core\hacks\esp.h" />
     <ClInclude Include="core\hacks\legitaim.h" />
     <ClInclude Include="core\hacks\misc.h" />
@@ -179,9 +181,11 @@
     <ClInclude Include="dependencies\interfaces\ivengineclient.hpp" />
     <ClInclude Include="dependencies\interfaces\ivmodelinfo.hpp" />
     <ClInclude Include="dependencies\interfaces\ivmodelrender.hpp" />
+    <ClInclude Include="dependencies\interfaces\i_player_movement.hpp" />
     <ClInclude Include="dependencies\interfaces\i_render_view.hpp" />
     <ClInclude Include="dependencies\interfaces\i_trace.hpp" />
     <ClInclude Include="dependencies\utilities\fnv.hpp" />
+    <ClInclude Include="dependencies\utilities\md5.hpp" />
     <ClInclude Include="dependencies\utilities\netvars.hpp" />
     <ClInclude Include="dependencies\utilities\render.hpp" />
     <ClInclude Include="dependencies\utilities\singleton.hpp" />
