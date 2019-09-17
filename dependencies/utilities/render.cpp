@@ -44,6 +44,13 @@ void render::text(int x, int y, unsigned long font, const wchar_t* string, color
 	interfaces::surface->draw_text_pos(x, y);
 	interfaces::surface->draw_render_text(string, wcslen(string));
 }
+
+void render::draw_text(int x, int y, unsigned long font, const wchar_t* string, color colour) {
+	interfaces::surface->set_text_color(colour.r, colour.g, colour.b, colour.a);
+	interfaces::surface->draw_text_font(font);
+	interfaces::surface->draw_text_pos(x, y);
+	interfaces::surface->draw_render_text(string, wcslen(string));
+}
 void render::draw_text(int x, int y, unsigned long font, std::string string, bool text_centered, color colour) {
 	const auto converted_text = std::wstring(string.begin(), string.end());
 
