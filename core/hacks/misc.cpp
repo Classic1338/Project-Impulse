@@ -52,7 +52,7 @@ void c_misc::clantag_spammer() noexcept {
 	}
 
 	else if (interfaces::globals->cur_time > last_time) {
-		std::rotate(std::begin(tag), std::next(std::begin(tag)), std::end(tag));
+		std::rotate(std::begin(tag2), std::next(std::begin(tag2)), std::end(tag2));
 		utilities::apply_clan_tag(tag2.c_str());
 
 		last_time = interfaces::globals->cur_time + 0.9f;
