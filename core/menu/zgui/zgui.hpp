@@ -197,12 +197,15 @@ namespace zgui {
 		vec2 next_cursor_pos;
 		bool dragging;
 		bool opened;
+		int font;
 		int alpha;
 	};
 
 	// Start Input loop
 	ZGUI_API void poll_input(std::string_view window_name);
 	ZGUI_API void poll_input(HWND hwnd);
+
+	bool mouse_in_region(const int x, const int y, const int w, const int h) noexcept;
 
 	// Push cursor position to the stack defined in window context
 	ZGUI_API void push_cursor_pos(vec2 pos) noexcept;
@@ -218,6 +221,7 @@ namespace zgui {
 	ZGUI_API void end_window() noexcept;
 
 	ZGUI_API void begin_groupbox(std::string_view title, vec2 size, int flags = 0) noexcept;
+	bool tab_button(const char * id, const vec2 size, bool value) noexcept;
 	ZGUI_API void end_groupbox() noexcept;
 
 	ZGUI_API void checkbox(const char* id, bool& value) noexcept;

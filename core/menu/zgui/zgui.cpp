@@ -16,7 +16,7 @@ static struct {
 	color window_border_fill{ 40, 40, 40, 255 };
 	color window_border_color{ 10, 10, 10, 255 };
 	color window_background{ 40, 40, 40, 255 };
-
+	color window_border_background{ 56, 56, 56, 255 };
 	color control_outline{ 23, 23, 30, 255 };
 	color control_active_or_clicked{ 108, 92, 231, 255 };
 	color control_idle{ 62, 62, 72, 255 };
@@ -115,7 +115,7 @@ constexpr bool key_released(const int key) noexcept
 }
 
 // Check if mouse is hovered over specified region.
-bool mouse_in_region(const int x, const int y, const int w, const int h) noexcept
+bool zgui::mouse_in_region(const int x, const int y, const int w, const int h) noexcept
 {
 	return mouse_pos.x > x && mouse_pos.y > y && mouse_pos.x < w + x && mouse_pos.y < h + y;
 }
@@ -338,6 +338,53 @@ void zgui::end_window() noexcept
 
 }
 
+bool zgui::tab_button(const char* id, const vec2 size, bool value) noexcept
+{
+	std::vector<std::string> id_split = split_str(id, '#');
+
+	const vec2 cursor_pos = pop_cursor_pos();
+	const vec2 draw_pos{ context.window.position.x + cursor_pos.x, context.window.position.y + cursor_pos.y };
+
+	const bool active = context.window.blocking == hash(id);
+	const bool hovered = mouse_in_region(draw_pos.x, draw_pos.y, size.x, size.y);
+
+	int text_wide, text_tall;
+	functions.get_text_size(context.window.font, id_split[0].c_str(), text_wide, text_tall);
+
+	context.window.render.emplace_back(zgui_control_render_t{ {draw_pos.x + size.x / 2 - text_wide / 2, draw_pos.y + size.y / 2 - text_tall / 2 }, zgui_render_type::zgui_text, global_colors.color_text,  id_split[0].data() });
+
+	if (value)
+	{
+		context.window.render.emplace_back(zgui_control_render_t{ { draw_pos.x, draw_pos.y + size.y - 2 }, zgui_render_type::zgui_filled_rect, global_colors.control_active_or_clicked, "", {size.x - 1, 1} });
+	}
+
+
+	context.window.render.emplace_back(zgui_control_render_t{ { draw_pos.x + 1, draw_pos.y + 1 }, zgui_render_type::zgui_filled_rect,hovered ? global_colors.window_border_fill : global_colors.window_border_background, "",{size.x - 2, size.y - 2} });
+	context.window.render.emplace_back(zgui_control_render_t{ { draw_pos.x, draw_pos.y }, zgui_render_type::zgui_filled_rect, global_colors.control_outline, "", size });
+
+	push_cursor_pos(vec2{ cursor_pos.x + size.x + global_config.item_spacing, cursor_pos.y });
+	push_cursor_pos(vec2{ cursor_pos.x, cursor_pos.y + size.y / 2 + global_config.item_spacing });
+
+	bool result = false;
+	if (!active && hovered && key_pressed(VK_LBUTTON))
+	{
+		context.window.blocking = hash(id);
+	}
+	else if (active && !key_down(VK_LBUTTON))
+	{
+		context.window.blocking = 0;
+		result = hovered;
+		value = true;
+	}
+
+	return result;
+}
+void zgui::end_groupbox() noexcept
+{
+	push_cursor_pos(context.window.next_cursor_pos);
+	context.window.next_cursor_pos = { };
+}
+
 void zgui::begin_groupbox(std::string_view title, const vec2 size, const int flags) noexcept
 {
 	const int font = pop_font();
@@ -367,12 +414,6 @@ void zgui::begin_groupbox(std::string_view title, const vec2 size, const int fla
 	push_cursor_pos(vec2{ cursor_pos.x + 8, cursor_pos.y + 14 });
 
 	push_font(font);
-}
-
-void zgui::end_groupbox() noexcept
-{
-	push_cursor_pos(context.window.next_cursor_pos);
-	context.window.next_cursor_pos = { };
 }
 
 void zgui::checkbox(const char* id, bool& value) noexcept

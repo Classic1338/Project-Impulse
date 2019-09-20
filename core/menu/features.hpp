@@ -13,6 +13,7 @@ public:
 	bool Legitbot = false;
 	bool ClanTag = false;
 	bool Ragebot = false;
+	bool OldMenu = true;
 	bool BacktrackRage = false;
 	float BacktrackRageTime = 200;
 	bool Backtrack = false;

@@ -182,10 +182,10 @@ LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM
 
 	static bool pressed = false;
 
-	if (!pressed && GetAsyncKeyState(VK_INSERT)) {
+	if (!pressed && GetKeyState(VK_INSERT)) {
 		pressed = true;
 	}
-	else if (pressed && !GetAsyncKeyState(VK_INSERT)) {
+	else if (pressed && !GetKeyState(VK_INSERT)) {
 		pressed = false;
 		
 		menu.menuOpened = !menu.menuOpened;
