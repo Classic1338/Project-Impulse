@@ -182,10 +182,10 @@ LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM
 
 	static bool pressed = false;
 
-	if (!pressed && GetKeyState(VK_INSERT)) {
+	if (!pressed && GetKeyState(VK_INSERT) & 1) {
 		pressed = true;
 	}
-	else if (pressed && !GetKeyState(VK_INSERT)) {
+	else if (pressed && !GetKeyState(VK_INSERT) & 1) {
 		pressed = false;
 		
 		menu.menuOpened = !menu.menuOpened;
@@ -199,7 +199,7 @@ LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM
 		interfaces::inputsystem->enable_input(true);
 	}
 
-	if (menu.menuOpened && GetKeyState(VK_INSERT))
+	if (menu.menuOpened && GetKeyState(VK_INSERT) & 1)
 		return true;
 
 	return CallWindowProcW(wndproc_original, hwnd, message, wparam, lparam);
@@ -207,7 +207,7 @@ LRESULT __stdcall hooks::wndproc( HWND hwnd, UINT message, WPARAM wparam, LPARAM
 
 void __stdcall hooks::lock_cursor() noexcept {
 
-	if (GetKeyState(VK_INSERT))
+	if (GetKeyState(VK_INSERT) & 1)
 		menu.menuOpened = true;
 
 	static auto original_fn = reinterpret_cast<lock_cursor_fn>(surface_hook->get_original(67));
