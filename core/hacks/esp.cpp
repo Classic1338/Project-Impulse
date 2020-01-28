@@ -37,10 +37,6 @@ void Esp::loop()
 	}
 }
 
-void Esp::chams() noexcept {
- 
-}
-
 void Esp::draw(player_t * entity)
 {
 	box bbox;
@@ -143,45 +139,4 @@ void Esp::draw(player_t * entity)
 		render::draw_filled_rect(bbox.x - 5, bbox.y - 5, bbox.w / 100, bbox.h + 2, color(33, 35, 47, 155));
 		render::draw_filled_rect(temp.x, temp.y, 3, temp.h, color(health_color));
 	}
-}
-
-void Esp::dropped_weapons(player_t* entity) noexcept {
-	//auto class_id = entity->clientclass()->class_id;
-	//auto model_name = interfaces::model_info->get_model_name(entity->model());
-	//auto weapon = entity;
-
-	//if (!entity)
-	//	return;
-
-	//if (!weapon)
-	//	return;
-
-	//vec3_t dropped_weapon_position, dropped_weapon_origin;
-
-	//dropped_weapon_origin = weapon->origin();
-
-	//if (!math.world_to_screen(dropped_weapon_origin, dropped_weapon_position))
-	//	return;
-
-	//if (!(entity->origin().x == 0 && entity->origin().y == 0 && entity->origin().z == 0)) { //ghetto fix sorry - designer
-	//	if (Features.DroppedGuns) {
-	//		if (strstr(entity->clientclass()->network_name, ("CWeapon"))) {
-	//			std::string data = strstr(entity->clientclass()->network_name, ("CWeapon"));
-	//			std::transform(data.begin(), data.end(), data.begin(), ::tolower); //convert dropped weapons names to lowercase, looks cleaner - designer
-	//			render::draw_text(dropped_weapon_position.x, dropped_weapon_position.y, render::main_font, clean_item_name(data), true, color(255, 255, 255));
-	//		}
-
-	//		if (class_id == class_ids::cak47)
-	//			render::draw_text(dropped_weapon_position.x, dropped_weapon_position.y, render::main_font, "ak47", true, color(255, 255, 255));
-
-	//		if (class_id == class_ids::cc4)
-	//			render::draw_text(dropped_weapon_position.x, dropped_weapon_position.y, render::main_font, "bomb", true, color(255, 255, 255));
-
-	//		if (class_id == class_ids::cdeagle)
-	//			render::draw_text(dropped_weapon_position.x, dropped_weapon_position.y, render::main_font, "deagle", true, color(255, 255, 255));
-
-	//		if (strstr(model_name, "w_defuser"))
-	//			render::draw_text(dropped_weapon_position.x, dropped_weapon_position.y, render::main_font, "defuse kit", true, color(255, 255, 255));
-	//	}
-	//}
 }
